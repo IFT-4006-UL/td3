@@ -1,5 +1,7 @@
 package mockito;
 
+import mockito.exceptions.ExamGradeAlreadyRecordedException;
+
 public class Student {
     private final StudentRecord studentRecord;
     private double finalGrade = 0;
@@ -9,7 +11,7 @@ public class Student {
     }
     public void calculateExamGrade(String examId, double weightedGrade) {
         if (studentRecord.containsExamRecord(examId)) {
-            finalGrade -= studentRecord.findExamWeightedGrade(examId);
+            throw new ExamGradeAlreadyRecordedException();
         } else {
             studentRecord.addExamRecord(examId, weightedGrade);
         }
